@@ -1,8 +1,6 @@
 package org.blogsite.tmsfasdom.appdenize;
 
-/**
- * Created by Denize on 02/11/2015.
- */
+
 import android.Manifest;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -119,7 +117,53 @@ public class CameraSourcePreview extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        if (changed && getChildCount() > 0)
+/*
+        int width = 320;
+        int height = 240;
+        if (mCameraSource != null) {
+            Size size = mCameraSource.getPreviewSize();
+            if (size != null) {
+                width = size.getWidth();
+                height = size.getHeight();
+            }
+        }
+
+        // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
+        if (isPortraitMode()) {
+            int tmp = width;
+            //noinspection SuspiciousNameCombination
+            width = height;
+            height = tmp;
+        }
+
+        final int layoutWidth = right - left;
+        final int layoutHeight = bottom - top;
+
+        // Computes height and width for potentially doing fit width.
+        int childWidth = layoutWidth;
+        int childHeight = (int)(((float) layoutWidth / (float) width) * height);
+
+        // If height is too tall using fit width, does fit height instead.
+        if (childHeight > layoutHeight) {
+            childHeight = layoutHeight;
+            childWidth = (int)(((float) layoutHeight / (float) height) * width);
+        }
+
+        for (int i = 0; i < getChildCount(); ++i) {
+            getChildAt(i).layout(0, 0, childWidth, childHeight);
+        }
+
+        try {
+            startIfReady();
+        } catch (SecurityException se) {
+            Log.e(TAG,"Do not have permission to start the camera", se);
+        } catch (IOException e) {
+            Log.e(TAG, "Could not start camera source.", e);
+        }
+    }*/
+
+       //Camera Full Screen
+       if (changed && getChildCount() > 0)
         {
             final View child = getChildAt(0);
 

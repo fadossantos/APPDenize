@@ -1,8 +1,5 @@
 package org.blogsite.tmsfasdom.appdenize;
 
-/**
- * Created by Denize on 02/11/2015.
- */
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -120,9 +117,12 @@ public class CameraSource {
 
     // These values may be requested by the caller.  Due to hardware limitations, we may need to
     // select close, but not exactly the same values for these.
-    private float mRequestedFps = 5.0f;
-    private int mRequestedPreviewWidth = 1024;
-    private int mRequestedPreviewHeight = 768;
+    private float mRequestedFps = 30.0f;
+    //private int mRequestedPreviewWidth = 1024;
+    //private int mRequestedPreviewHeight = 768;
+
+    private int mRequestedPreviewWidth = 3264;
+    private int mRequestedPreviewHeight = 2448;
 
 
     private String mFocusMode = null;

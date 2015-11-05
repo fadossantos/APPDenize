@@ -3,6 +3,7 @@ package org.blogsite.tmsfasdom.appdenize;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.app.Activity;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+import org.blogsite.tmsfasdom.bancolibs.Tratamentos;
 
 
 
@@ -27,7 +29,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         private CompoundButton useFlash;
         private TextView statusMessage;
         private TextView barcodeValue;
-
+        private TextView barcodeDesc;
+        private TextView retornoDesc;
         private static final int RC_BARCODE_CAPTURE = 9001;
         private static final String TAG = "BarcodeMain";
 
@@ -38,7 +41,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             statusMessage = (TextView)findViewById(R.id.status_message);
             barcodeValue = (TextView)findViewById(R.id.barcode_value);
-
+            barcodeDesc = (TextView)findViewById(R.id.barcode_desc);
+            retornoDesc = (TextView)findViewById(R.id.retorno_desc);
             autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
             useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
@@ -92,7 +96,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     if (data != null) {
                         Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                         statusMessage.setText(R.string.barcode_success);
+                        barcodeDesc.setText("Código de Barras:");
                         barcodeValue.setText(barcode.displayValue);
+
+                        retornoDesc.setMovementMethod(new ScrollingMovementMethod());
+                        retornoDesc.setText("Linha Digitável:");
+                        retornoDesc.append("\n" + Tratamentos.RetornaLinhaDigitavel(barcode.displayValue));
+                        retornoDesc.append("\nNosso Numero");
+                        retornoDesc.append("\n" + Tratamentos.retornaNossoNumero(barcode.displayValue, Tratamentos.retornaTipoBoleto(barcode.displayValue)));
+                        retornoDesc.append("\nValor");
+                        retornoDesc.append("\n" + Tratamentos.retornaValor(barcode.displayValue));
+                        retornoDesc.append("\nCarteira");
+                        retornoDesc.append("\n" + Tratamentos.retornaCarteira(barcode.displayValue));
+                        if(Tratamentos.retornaTipoBoleto(barcode.displayValue)==3)
+                        {
+                            retornoDesc.append(Tratamentos.retornaAgenciaConta(barcode.displayValue));
+                        }
                         Log.d(TAG, "Barcode read: " + barcode.displayValue);
                     } else {
                         statusMessage.setText(R.string.barcode_failure);

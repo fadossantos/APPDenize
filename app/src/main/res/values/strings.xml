@@ -5,7 +5,7 @@
     <string name="permission_camera_rationale">É necessário acesso à Camera para detecção.</string>
     <string name="no_camera_permission">É necessário permissão para o uso da Camera.  A aplicação será encerrada.</string>
     <string name="low_storage_error">Dependencias do Leitor de Codigos não puderam ser baixadas devido à pouca Memória</string>
-    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="barcode_header">Clique no Botão Ler o Cód. Barras</string>
     <string name="read_barcode">Ler Código de Barras</string>
     <string name="auto_focus">Auto Foco</string>
     <string name="use_flash">Usar Flash</string>

@@ -1,12 +1,10 @@
 package org.blogsite.tmsfasdom.appdenize;
 
-/**
- * Created by Denize on 02/11/2015.
- */
 
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -77,7 +75,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.barcode_capture);
-
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
 
@@ -97,7 +94,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
+        Snackbar.make(mGraphicOverlay, "Toque para Ler. Use \"Pinça\" para zoom",
                 Snackbar.LENGTH_LONG)
                 .show();
     }
@@ -193,8 +190,9 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         // at long distances.
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
-                .setRequestedFps(5.0f);
+               // .setRequestedPreviewSize(1600, 1024)
+                .setRequestedPreviewSize(3264, 2448)
+                .setRequestedFps(30.0f);
 
         // make sure that auto focus is an available option
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
