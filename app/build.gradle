@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 28
 
     defaultConfig {
-        applicationId "org.blogsite.tmsfasdom.appdenize"
+        applicationId "br.com.tmsfasdom.appdenize"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -20,16 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    //compile 'com.android.support:appcompat-v7:22.0.0'
-
-
-
-    compile 'com.android.support:support-v4:23.0.1'
-    // Important - the CameraSource implementation in this project requires version 8.1 or higher.
-    compile 'com.google.android.gms:play-services:8.1.0'
-    compile 'com.android.support:design:23.0.1'
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
 }

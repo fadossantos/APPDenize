@@ -1,4 +1,4 @@
-package org.blogsite.tmsfasdom.appdenize;
+package br.com.tmsfasdom.appdenize;
 
 /**
  * Created by Denize on 02/11/2015.
@@ -9,10 +9,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import com.google.android.gms.vision.barcode.Barcode;
 
 //import com.google.android.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
-import org.blogsite.tmsfasdom.appdenize.GraphicOverlay;
-import com.google.android.gms.vision.barcode.Barcode;
 
 /**
  * Graphic instance for rendering barcode position, size, and ID within an associated graphic
@@ -20,33 +19,22 @@ import com.google.android.gms.vision.barcode.Barcode;
  */
 public class BarcodeGraphic extends GraphicOverlay.Graphic {
 
-    private int mId;
-
-    private static final int COLOR_CHOICES[] = {
+    private static final int[] COLOR_CHOICES = {
             Color.BLUE,
-            Color.CYAN,
+            Color.RED,
             Color.GREEN
     };
-
-    private static int mCurrentColorIndex = 0;
-
+    private int mId;
     private Paint mRectPaint;
     private Paint mTextPaint;
     private volatile Barcode mBarcode;
 
     BarcodeGraphic(GraphicOverlay overlay) {
         super(overlay);
-
-        mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
-        final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
-
         mRectPaint = new Paint();
-        mRectPaint.setColor(selectedColor);
         mRectPaint.setStyle(Paint.Style.STROKE);
         mRectPaint.setStrokeWidth(4.0f);
-
         mTextPaint = new Paint();
-        mTextPaint.setColor(selectedColor);
         mTextPaint.setTextSize(36.0f);
     }
 
@@ -80,6 +68,14 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic {
         if (barcode == null) {
             return;
         }
+        int selectedColor;
+        if (this.mBarcode.displayValue.length() == 44) {
+            selectedColor = Color.BLUE;
+        } else {
+            selectedColor = Color.RED;
+        }
+        mRectPaint.setColor(selectedColor);
+        mTextPaint.setColor(selectedColor);
 
         // Draws the bounding box around the barcode.
         RectF rect = new RectF(barcode.getBoundingBox());

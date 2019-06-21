@@ -5,7 +5,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="org.blogsite.tmsfasdom.appdenize.DisplayMessageActivity">
+                android:id="@+id/relative_layout"
+
+                tools:context="br.com.tmsfasdom.appdenize.MainActivity">
 
     <TextView
         android:layout_width="match_parent"

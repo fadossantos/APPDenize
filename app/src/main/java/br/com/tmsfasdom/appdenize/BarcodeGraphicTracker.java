@@ -1,5 +1,6 @@
-package org.blogsite.tmsfasdom.appdenize;
+package br.com.tmsfasdom.appdenize;
 
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -7,7 +8,6 @@ import com.google.android.gms.vision.barcode.Barcode;
  * Created by Denize on 02/11/2015.
  */
 //import com.google.android.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
-import com.google.android.gms.vision.Detector;
 
 
 /**

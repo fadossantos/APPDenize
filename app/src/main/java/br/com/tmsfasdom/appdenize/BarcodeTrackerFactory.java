@@ -1,9 +1,10 @@
-package org.blogsite.tmsfasdom.appdenize;
+package br.com.tmsfasdom.appdenize;
 
 /**
  * Created by Denize on 02/11/2015.
  */
 //com.google.android.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
+
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.barcode.Barcode;

@@ -8,16 +8,16 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <org.blogsite.tmsfasdom.appdenize.CameraSourcePreview
+    <br.com.tmsfasdom.appdenize.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width= "match_parent"
         android:layout_height="match_parent">
 
-        <org.blogsite.tmsfasdom.appdenize.GraphicOverlay
+        <br.com.tmsfasdom.appdenize.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </org.blogsite.tmsfasdom.appdenize.CameraSourcePreview>
+    </br.com.tmsfasdom.appdenize.CameraSourcePreview>
 
 </LinearLayout>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">APPDenize</string>
-    <string name="title_activity_main">Tela Principal</string>
+    <string name="title_activity_main">APP Denize</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">É necessário acesso à Camera para detecção.</string>
     <string name="no_camera_permission">É necessário permissão para o uso da Camera.  A aplicação será encerrada.</string>
@@ -12,4 +12,5 @@
     <string name="barcode_success">Código de Barras Lido Com Sucesso</string>
     <string name="barcode_failure">Nenhum Código de Barras Capturado</string>
     <string name="barcode_error">"Erro na Leitura do Código de Barras: %1$s"</string>
+    <string name="leitura_ivalida">Leitura Inválida, tente novamente.</string>
 </resources>

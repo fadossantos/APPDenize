@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.blogsite.tmsfasdom.appdenize" >
-
-    <uses-feature android:name="android.hardware.camera" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
+          package="br.com.tmsfasdom.appdenize">
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <supports-screens android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="true" android:xlargeScreens="true"/>
+                      android:normalScreens="true"
+                      android:smallScreens="true" android:xlargeScreens="true"/>
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="false"
-        android:hardwareAccelerated="true">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            android:fullBackupContent="false"
+            android:hardwareAccelerated="true">
         <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode" />
+                android:name="com.google.android.gms.vision.DEPENDENCIES"
+                android:value="barcode"/>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+                android:name="br.com.tmsfasdom.appdenize.MainActivity"
+                android:label="@string/title_activity_main">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".BarcodeCaptureActivity"
-            android:label="Ler Código de Barras"/>
-
-
+        <activity android:name="br.com.tmsfasdom.appdenize.BarcodeCaptureActivity"
+                  android:label="Ler Código de Barras"/>
     </application>
-
 </manifest>

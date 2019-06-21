@@ -1,10 +1,8 @@
-package org.blogsite.tmsfasdom.appdenize;
-
+package br.com.tmsfasdom.appdenize;
 
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,11 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -28,12 +24,9 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
-
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
@@ -47,19 +40,15 @@ import java.util.Set;
  * size, and ID of each barcode.
  */
 public final class BarcodeCaptureActivity extends AppCompatActivity {
-    private static final String TAG = "Barcode-reader";
-
-    // intent request code to handle updating play services if needed.
-    private static final int RC_HANDLE_GMS = 9001;
-
-    // permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 2;
-
     // constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
-
+    private static final String TAG = "Barcode-reader";
+    // intent request code to handle updating play services if needed.
+    private static final int RC_HANDLE_GMS = 9001;
+    // permission request codes need to be < 256
+    private static final int RC_HANDLE_CAMERA_PERM = 2;
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
@@ -75,8 +64,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.barcode_capture);
-        mPreview = (CameraSourcePreview) findViewById(R.id.preview);
-        mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
+        mPreview = findViewById(R.id.preview);
+        mGraphicOverlay = findViewById(R.id.graphicOverlay);
 
         // read parameters from the intent used to launch the activity.
         boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
@@ -144,7 +133,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
      * Creates and starts the camera.  Note that this uses a higher resolution in comparison
      * to other detection examples to enable the barcode detector to detect small barcodes
      * at long distances.
-     *
+     * <p>
      * Suppressing InlinedApi since there is a check that the minimum version is met before using
      * the constant.
      */
@@ -190,7 +179,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         // at long distances.
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-               // .setRequestedPreviewSize(1600, 1024)
+                // .setRequestedPreviewSize(1600, 1024)
                 .setRequestedPreviewSize(3264, 2448)
                 .setRequestedFps(30.0f);
 
@@ -266,7 +255,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "Camera permission granted - initialize the camera source");
             // we have permission, so create the camerasource
-            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus,false);
+            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
             boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
             createCameraSource(autoFocus, useFlash);
             return;
@@ -323,45 +312,26 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
      * @return true if the activity is ending.
      */
     private boolean onTap(float rawX, float rawY) {
-
-        //TODO: use the tap position to select the barcode.
-
         Barcode barcode = null;
-        BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
-        if (graphic != null)
-        {
-            barcode = graphic.getBarcode();
-       /* Set<BarcodeGraphic> graphic = mGraphicOverlay.getGraphics();
-
-        Barcode barcode2 = null;
-
-            for (BarcodeGraphic graf:
-                 graphic)
-            {
-                barcode2 = graf.getBarcode();
-                Rect retang = barcode2.getBoundingBox();
-                int a = retang.centerX();
-                int b = retang.centerY();
-                if (barcode2.getBoundingBox().contains((int) rawX, (int) rawY))
-                {
+        Set<BarcodeGraphic> graphic = mGraphicOverlay.getGraphics();
+        BarcodeGraphic[] grafics = new BarcodeGraphic[5];
+        graphic.toArray(grafics);
+        for (BarcodeGraphic graf :
+                grafics) {
+            if (graf != null) {
+                Barcode barcode2 = graf.getBarcode();
+                if (barcode2 != null && barcode2.displayValue.length() == 44) {
+                    Intent data = new Intent();
+                    data.putExtra(BarcodeObject, barcode2);
                     barcode = barcode2;
-                    break;
+                    setResult(CommonStatusCodes.SUCCESS, data);
+                    finish();
                 }
-
-            }*/
-
-            if (barcode != null) {
-                Intent data = new Intent();
-                data.putExtra(BarcodeObject, barcode);
-                setResult(CommonStatusCodes.SUCCESS, data);
-                finish();
-            }
-            else {
-                Log.d(TAG, "barcode data is null");
             }
         }
-        else {
-            Log.d(TAG,"no barcode detected");
+        if (barcode == null) {
+            Toast.makeText(this, R.string.leitura_ivalida, Toast.LENGTH_LONG).show();
+            Log.d(TAG, "barcode invalid");
         }
         return barcode != null;
     }
